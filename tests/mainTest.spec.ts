@@ -212,5 +212,6 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await page.waitForTimeout(10000);
     
     await browser.close();
+    //Application flow of the founder ends
 
 });
