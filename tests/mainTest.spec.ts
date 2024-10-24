@@ -13,18 +13,24 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     // User Registration
     const userFirstName = generateFirstName();
     await page.fill("//input[@name='user[first_name]']", userFirstName);
+    await page.waitForTimeout(1000);
 
     const userLastName = generateLastName();
     await page.fill("//input[@name='user[last_name]']", userLastName);
+    await page.waitForTimeout(1000);
 
     const userEmail = generateEmail(userFirstName, userLastName);
     await page.fill("//input[@name='user[email]' and @id='top_email']", userEmail);
+    await page.waitForTimeout(1000);
 
     const userPassword = generateRandomPassword(10);
     await page.fill("//input[@name='user[password]' and @id='top_password']", userPassword);
+    await page.waitForTimeout(1000);
 
     await page.selectOption("//select[@id='top_idea_state_cd']", { label: "Early idea" });
+    await page.waitForTimeout(1000);
     await page.click("(//div[contains(text(),'or Apply with')]/preceding::input)[13]");
+    await page.waitForTimeout(1000);
     console.log("A user registered successfully");
     console.log('Founder Email : ' + userEmail)
     console.log('Founder Name : ' + userFirstName + ' ' + userLastName);
@@ -32,52 +38,81 @@ test('Lead to Confirmed automation flow of a founder', async () => {
 
     // Application Flow
     await page.selectOption("//select[@id='user_education_cd']", { label: "High School" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_professional_experience_cd']", { label: "3-4" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_start_up_experience_cd']", { label: "3-4" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_idea_field_experience_cd']", { label: "5-10" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_working_hrs_on_idea_cd']", { label: "11-20" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_team_size_cd']", { label: "2" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_team_working_hrs']", { label: "3-4" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_team_tech_experience']", { label: "Yes" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_team_business_experience']", { label: "Yes" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_business_incorporated']", { label: "Yes" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@id='user_primary_skill_cd']", { label: "Marketing" });
+    await page.waitForTimeout(1000);
 
     await page.fill("//textarea[@id='user_field_2']", "Write 1-­2 paragraphs describing your startup idea (or ideas). If you do not have a final startup idea, then describe an industry or customer problem that you might want to build a business around");
+    await page.waitForTimeout(1000);
 
     await page.selectOption("//select[@name='user[idea_align]']", { label: "04. Quality Education" });
+    await page.waitForTimeout(1000);
     await page.fill("//textarea[@name='user[idea_and_positive_impact]']", "Write 1-­2 paragraphs describing your startup idea (or ideas). If you do not have a final startup idea, then describe an industry or customer problem that you might want to build a business around");
+    await page.waitForTimeout(1000);
 
     await page.selectOption("//select[@name='user[primary_industry]']", { label: "AgriTech / PetTech" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@name='user[secondary_industry]']", { label: "AdTech / Marketing" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@name='user[primary_help]']", { label: "Improving My Idea/ Strategy" });
+    await page.waitForTimeout(1000);
     await page.selectOption("//select[@name='user[secondary_help]']", { label: "Internationalization" });
+    await page.waitForTimeout(1000);
 
     await page.click("//button[contains(text(),'Continue')]");
+    await page.waitForTimeout(1000);
 
     // Personal Information
     await page.selectOption("//select[@id='user_gender']", { label: "Non binary" });
+    await page.waitForTimeout(1000);
     await page.fill("//input[@id='user_phone_number_tmp']", "2015551234");
+    await page.waitForTimeout(1000);
     await page.fill("//input[@id='user_linkedin_website']", "https://linkedin.com");
+    await page.waitForTimeout(1000);
 
     await page.fill("//input[@id='location_city']", "Bali");
+    await page.waitForTimeout(1000);
     await page.fill("//input[@id='location_country']", "Indonesia");
+    await page.waitForTimeout(1000);
 
     await page.click("(//span[@class='selection'])[2]");
+    await page.waitForTimeout(1000);
     await page.fill("//input[@class='select2-search__field']", "algeria");
+    await page.waitForTimeout(1000);
     await page.keyboard.press('Enter');
+    await page.waitForTimeout(1000);
 
     // Company Information
     await page.fill("//input[@id='company_name']", "Automation");
+    await page.waitForTimeout(1000);
 
     // Referral Source
     await page.selectOption("//select[@id='user_source_3']", { label: "Twitter" });
+    await page.waitForTimeout(1000);
     await page.fill("//input[@id='user_source_1']", "Friend");
     await page.waitForTimeout(1000);
 
     await page.click("//button[contains(text(),'Submit Application')]");
     await page.waitForTimeout(1000);
-    await page.close(); // **Delete this line to continue the DNA test**
+    await page.close(); // **<<<<< Delete this line to continue the DNA test >>>>>**
 
     /*
     // DNA Assessment
@@ -138,12 +173,16 @@ test('Lead to Confirmed automation flow of a founder', async () => {
 
     // SuperAdmin Login
     await page.goto('https://startcouncil.org/join?target=11160');
+    await page.waitForTimeout(1000);
     await page.click("//span[contains(text(),'Sign in')]");
+    await page.waitForTimeout(1000);
     await page.fill("//input[@name='user[email]' and @id='#form_email_address']", "bv@fi.co");
     await page.fill("//input[@name='user[password]' and @placeholder='Password']", "qwerty@fiqa");
     await page.click("//span[contains(text(),'Login')]");
+    await page.waitForTimeout(1000);
 
     await page.goto('https://startcouncil.org/admin/enrollmentmeta');
+    await page.waitForTimeout(1000);
 
     const iframe = await page.waitForSelector("//iframe[@id='embedded_iframe']");
     const frame = await iframe.contentFrame();
@@ -154,45 +193,57 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     const searchButton = await frame.locator("//input[@value='Search']");
 
     await searchField.fill(userEmail);
+    await page.waitForTimeout(1000);
     await searchButton.click();
+    await page.waitForTimeout(1000);
 
     const statusDropdown = await frame.locator("(//div[@id='search']/child::form/child::div/child::select)[1]");
     await statusDropdown.selectOption({value:'Accepted'});
+    await page.waitForTimeout(1000);
     const statusSave = await frame.locator("//div[@id='search']/child::form/child::div/child::select/following-sibling::input");
     await statusSave.click();
+    await page.waitForTimeout(1000);
     }
     await page.close();
-    console.log("Founder moved to confirmed state");
+    console.log("<<<<<< Founder moved to confirmed state >>>>>>");
     
     // User Agreement and Payment
     await page.goto('https://startcouncil.org/join?target=11160');
+    await page.waitForTimeout(1000);
     await page.click("//span[contains(text(),'Sign in')]");
+    await page.waitForTimeout(1000);
 
     await page.waitForSelector("//input[@name='user[email]' and @id='#form_email_address']");
     await page.fill("//input[@name='user[email]' and @id='#form_email_address']", userEmail);
     await page.fill("//input[@name='user[password]' and @placeholder='Password']", userPassword);
 
     await page.click("//span[contains(text(),'Login')]");
+    await page.waitForTimeout(1000);
     
     await page.waitForSelector("//a[contains(text(),'Sign the Entrance Agreement')]");
     await page.click("//a[contains(text(),'Sign the Entrance Agreement')]");
+    await page.waitForTimeout(1000);
   
     await page.waitForSelector("(//div[contains(text(),'Review and Sign')]/following-sibling::div/following::button)[1]");
     await page.click("(//div[contains(text(),'Review and Sign')]/following-sibling::div/following::button)[1]");
+    await page.waitForTimeout(1000);
   
-    const agreementFilePath = 'C:\\Users\\NIKHHIL\\Documents\\Automation\\enterance_agreement_test.pdf';
+    const agreementFilePath = 'C:\\Users\\Nikhil Raju\\Documents\\AutomationFiles\\enterance_agreement_test.pdf';
     await page.waitForTimeout(2000);
     const [fileChooser] = await Promise.all([
       page.waitForEvent('filechooser'),
-      page.click("(//div[contains(text(),'Upload the signed')]/following::input)[1]") // Trigger file chooser
+      page.click("(//div[contains(text(),'Upload the signed')]/following::input)[1]")
     ]);
     await fileChooser.setFiles(agreementFilePath);
+    await page.waitForTimeout(1000);
   
     await page.waitForSelector("(//div[contains(text(),'Upload the signed')]/following::input)[2]");
     await page.click("(//div[contains(text(),'Upload the signed')]/following::input)[2]");
+    await page.waitForTimeout(1000);
   
     await page.click("//button[contains(text(),'Pay the Entrance Fee')]");
-  
+    await page.waitForTimeout(1000);
+    
     await page.click("//button[contains(text(),'Pay with Card')]");
     await page.frameLocator('iframe').locator("(//span[@class='InputContainer'])[1]").fill('4242424242424242'); // Card Number
     await page.frameLocator('iframe').locator("(//span[@class='InputContainer'])[2]").fill('1234'); // Expiry Date (MM/YY)
