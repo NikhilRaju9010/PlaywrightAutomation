@@ -1,7 +1,5 @@
 import { test ,chromium} from '@playwright/test';
-import { NumberEntry } from './numberEnter.spec';
 import { generateFirstName, generateLastName, generateEmail, generateRandomPassword } from './userInfoGenerator.spec';
-import { Console, log } from 'console';
 test('Lead to Confirmed automation flow of a founder', async () => {
     test.setTimeout(60000);
 
@@ -212,6 +210,5 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await page.waitForTimeout(10000);
     
     await browser.close();
-    //Application flow of the founder ends
 
 });
