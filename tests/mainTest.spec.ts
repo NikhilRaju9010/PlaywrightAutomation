@@ -170,19 +170,25 @@ test('Lead to Confirmed automation flow of a founder', async () => {
 
     await page.waitForSelector("//button[contains(text(),'Submit Application')]", { state: 'visible' });
     await page.click("//button[contains(text(),'Submit Application')]");
-    await page.close(); // **<<<<< Delete this line to continue the DNA test >>>>>**
-
-    /*
-    // DNA Assessment
     await page.waitForTimeout(1000);
+    //await page.close(); // **<<<<< Delete this line to continue the DNA test >>>>>**
+
+    //******************************************************************************************************************************
+    // DNA Assessment
+    await page.waitForSelector("//a[contains(text(),'Start the Assessment')]");
     await page.click("//a[contains(text(),'Start the Assessment')]");
     await page.waitForTimeout(1000);
-    await page.click("//a[contains(text(),'Get Started')]");
 
+    await page.waitForSelector("//a[contains(text(),'Get Started')]");
+    await page.click("//a[contains(text(),'Get Started')]");
+    await page.waitForTimeout(1000);
+
+    // First loop for questions 1 to 2
     for (let questionNumber = 1; questionNumber <= 2; questionNumber++) {
         for (let buttonIndex = 2; buttonIndex <= 5; buttonIndex += 3) {
             const dynamicXPath = `(//div[contains(text(),'question ${questionNumber}')]/following::button)[${buttonIndex}]`;
             console.log(`Clicking button for Question ${questionNumber}, Button Index ${buttonIndex}: ${dynamicXPath}`);
+            
             const button = page.locator(dynamicXPath);
             await button.waitFor({ state: 'visible' });    
             await button.click();
@@ -190,12 +196,16 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     }
 
     await page.waitForTimeout(1000);
+    await page.waitForSelector("//button[contains(text(),'Start the full test')]");
     await page.click("//button[contains(text(),'Start the full test')]");
+    await page.waitForTimeout(1000);
 
+    // Second loop for questions 1 to 43
     for (let questionNumber = 1; questionNumber <= 43; questionNumber++) {
         for (let buttonIndex = 2; buttonIndex <= 5; buttonIndex += 3) {
             const dynamicXPath = `(//div[contains(text(),'question ${questionNumber}')]/following::button)[${buttonIndex}]`;
             console.log(`Clicking button for Question ${questionNumber}, Button Index ${buttonIndex}: ${dynamicXPath}`);
+            
             const button = page.locator(dynamicXPath);
             await button.waitFor({ state: 'visible' });
             await button.click();
@@ -203,31 +213,43 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     }
 
     await page.waitForTimeout(1000);
+    await page.waitForSelector("//button[contains(text(),'Continue')]");
     await page.click("//button[contains(text(),'Continue')]");
     await page.waitForTimeout(1000);
+
+    await page.waitForSelector("//div[@data-answer='3']");
     await page.click("//div[@data-answer='3']");
     await page.waitForTimeout(1000);
+
+    await page.waitForSelector("//button[contains(text(),'Continue')]");
     await page.click("//button[contains(text(),'Continue')]");
     await page.waitForTimeout(1000);
 
     for (let i = 1; i <= 11; i++) {
         await page.waitForTimeout(1000);
+        await page.waitForSelector("//div[@data-answer='3']");
         await page.click("//div[@data-answer='3']");
         await page.waitForTimeout(1000);
     }
 
     await page.waitForTimeout(1000);
+    await page.waitForSelector("//button[contains(text(),'Submit and view report')]");
     await page.click("//button[contains(text(),'Submit and view report')]");
     await page.waitForTimeout(1000);
+
+    await page.waitForSelector("//h4[contains(text(),'See Next Steps')]");
     await page.click("//h4[contains(text(),'See Next Steps')]");
     await page.waitForTimeout(1000);
 
+    await page.waitForSelector("/div[contains(text(),'Your Application to')]/preceding-sibling::div");
     const userNameText = await page.textContent("//div[contains(text(),'Your Application to')]/preceding-sibling::div");
+    await page.waitForSelector("//div[contains(text(),'Your Application to')]");
     const applicationNameText = await page.textContent("//div[contains(text(),'Your Application to')]");
     console.log(`* ${userNameText} <---> ${applicationNameText} *`);
 
     await browser.close();
-    */
+
+    //**************************************************************************************************************************************
 
     // SuperAdmin Login
     const adminBrowser = await chromium.launch({ headless: false });
