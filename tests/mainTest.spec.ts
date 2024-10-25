@@ -1,5 +1,6 @@
 import { test ,chromium} from '@playwright/test';
-import { NumberEntry } from './numberEnter.spec'
+import { NumberEntry } from './numberEnter.spec';
+import { RandomWeightGenerator } from './randomWaitGenerator.spec';
 import { generateFirstName, generateLastName, generateEmail, generateRandomPassword } from './userInfoGenerator.spec';
 test('Lead to Confirmed automation flow of a founder', async () => {
     test.setTimeout(120000);
@@ -9,37 +10,47 @@ test('Lead to Confirmed automation flow of a founder', async () => {
 
     await page.goto('https://startcouncil.org/join?target=11160',{ timeout: 120000 });
     console.log("User landed on the FI login/signup page");
+    const pageWaitTime = RandomWeightGenerator.getRandomWeight();
+    await page.waitForTimeout(pageWaitTime);
+
     await page.waitForSelector("(//span[contains(text(),'Apply')])[1]", { state: 'visible' });
     await page.click("(//span[contains(text(),'Apply')])[1]");
+    const applyButtonWaitTime = RandomWeightGenerator.getRandomWeight();
+    await page.waitForTimeout(applyButtonWaitTime);
 
     // User Registration
     const userFirstName = generateFirstName();
     await page.waitForSelector("//input[@name='user[first_name]']", { state: 'visible' });
     await page.fill("//input[@name='user[first_name]']", userFirstName);
-    await page.waitForTimeout(1000);
+    const userFirstNameWaitTime = RandomWeightGenerator.getRandomWeight();
+    await page.waitForTimeout(userFirstNameWaitTime);
 
     const userLastName = generateLastName();
     await page.waitForSelector("//input[@name='user[last_name]']", { state: 'visible' });
     await page.fill("//input[@name='user[last_name]']", userLastName);
-    await page.waitForTimeout(1000);
+    const userLastNameWaitTime = RandomWeightGenerator.getRandomWeight();
+    await page.waitForTimeout(userLastNameWaitTime);
 
     const userEmail = generateEmail(userFirstName, userLastName);
     await page.waitForSelector("//input[@name='user[email]' and @id='top_email']", { state: 'visible' });
     await page.fill("//input[@name='user[email]' and @id='top_email']", userEmail);
-    await page.waitForTimeout(1000);
+    const userEmailWeightTime = RandomWeightGenerator.getRandomWeight();
+    await page.waitForTimeout(userEmailWeightTime);
 
     const userPassword = generateRandomPassword(10);
     await page.waitForSelector("//input[@name='user[password]' and @id='top_password']", { state: 'visible' });
     await page.fill("//input[@name='user[password]' and @id='top_password']", userPassword);
-    await page.waitForTimeout(1000);
+    const userPasswordWaitTime = RandomWeightGenerator.getRandomWeight();
+    await page.waitForTimeout(userPasswordWaitTime);
 
     await page.waitForSelector("//select[@id='top_idea_state_cd']", { state: 'visible' });
     await page.selectOption("//select[@id='top_idea_state_cd']", { label: "Early idea" });
-    await page.waitForTimeout(1000);
+    const ideStateWaightTime = RandomWeightGenerator.getRandomWeight();
+    await page.waitForTimeout(ideStateWaightTime);
 
     await page.waitForSelector("(//div[contains(text(),'or Apply with')]/preceding::input)[13]", { state: 'visible' });
     await page.click("(//div[contains(text(),'or Apply with')]/preceding::input)[13]");
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(3000);
 
     console.log("A user registered successfully");
     console.log('Founder Email : ' + userEmail);
