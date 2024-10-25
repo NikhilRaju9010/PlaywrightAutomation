@@ -190,6 +190,7 @@ test('Lead to Confirmed automation flow of a founder', async () => {
             console.log(`Clicking button for Question ${questionNumber}, Button Index ${buttonIndex}: ${dynamicXPath}`);
             
             const button = page.locator(dynamicXPath);
+            await page.waitForSelector(dynamicXPath);
             await button.waitFor({ state: 'visible' });    
             await button.click();
         }
@@ -207,6 +208,7 @@ test('Lead to Confirmed automation flow of a founder', async () => {
             console.log(`Clicking button for Question ${questionNumber}, Button Index ${buttonIndex}: ${dynamicXPath}`);
             
             const button = page.locator(dynamicXPath);
+            await page.waitForSelector(dynamicXPath);
             await button.waitFor({ state: 'visible' });
             await button.click();
         }
