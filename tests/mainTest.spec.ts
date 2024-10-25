@@ -184,7 +184,6 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await page.waitForTimeout(1000);
     //await page.close(); // **<<<<< Delete this line to continue the DNA test >>>>>**
 
-    //******************************************************************************************************************************
     // DNA Assessment
     await page.waitForSelector("//a[contains(text(),'Start the Assessment')]");
     await page.click("//a[contains(text(),'Start the Assessment')]");
@@ -261,8 +260,6 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     console.log(`* ${userNameText} <---> ${applicationNameText} *`);
 
     await browser.close();
-
-    //**************************************************************************************************************************************
 
     // SuperAdmin Login
     const adminBrowser = await chromium.launch({ headless: false });
