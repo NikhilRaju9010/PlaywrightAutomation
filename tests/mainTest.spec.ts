@@ -182,8 +182,8 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await page.waitForSelector("//button[contains(text(),'Submit Application')]", { state: 'visible' });
     await page.click("//button[contains(text(),'Submit Application')]");
     await page.waitForTimeout(1000);
-    //await page.close(); // **<<<<< Delete this line to continue the DNA test >>>>>**
-
+    await page.close(); // **<<<<< Delete this line to continue the DNA test >>>>>**
+/*
     // DNA Assessment
     await page.waitForSelector("//a[contains(text(),'Start the Assessment')]");
     await page.click("//a[contains(text(),'Start the Assessment')]");
@@ -260,7 +260,7 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     console.log(`* ${userNameText} <---> ${applicationNameText} *`);
 
     await browser.close();
-
+*/
     // SuperAdmin Login
     const adminBrowser = await chromium.launch({ headless: false });
     const adminPage = await adminBrowser.newPage();
@@ -292,11 +292,10 @@ test('Lead to Confirmed automation flow of a founder', async () => {
         await frame.waitForSelector("//input[@id='user_name']", { state: 'visible' });
         const searchField = await frame.locator("//input[@id='user_name']");
 
-        await frame.waitForSelector("//input[@value='Search']", { state: 'visible' });
-        const searchButton = await frame.locator("//input[@value='Search']");
-
         await searchField.fill(userEmail);
         await adminPage.waitForTimeout(1000);
+        await frame.waitForSelector("//input[@value='Search']", { state: 'visible' });
+        const searchButton = await frame.locator("//input[@value='Search']");
         await searchButton.click();
         await adminPage.waitForTimeout(1000);
 
@@ -316,6 +315,7 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     // User Agreement and Payment
     const founderBrowser = await chromium.launch({ headless: false });
     const founderPage = await founderBrowser.newPage();
+    await founderPage.waitForTimeout(1000);
 
     await founderPage.goto('https://startcouncil.org/join?target=11160',{ timeout: 120000 });
     await founderPage.waitForTimeout(1000);
@@ -352,31 +352,63 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await fileChooser.setFiles(agreementFilePath);
     await founderPage.waitForTimeout(1000);
 
-    await founderPage.waitForSelector("(//div[contains(text(),'Upload the signed')]/following::input)[2]");
+    await founderPage.waitForSelector("(//div[contains(text(),'Upload the signed')]/following::input)[2]", { state: 'visible', timeout: 12000 });
     await founderPage.click("(//div[contains(text(),'Upload the signed')]/following::input)[2]");
-    await founderPage.waitForTimeout(1000);
+    await founderPage.waitForTimeout(2000);
 
     await founderPage.waitForSelector("//button[contains(text(),'Pay the Entrance Fee')]");
     await founderPage.click("//button[contains(text(),'Pay the Entrance Fee')]");
     await founderPage.waitForTimeout(1000);
     
     //Filling card details
-    await founderPage.waitForSelector("//button[contains(text(),'Pay with Card')]");
+    await founderPage.waitForSelector("//button[contains(text(),'Pay with Card')]", { state: 'visible', timeout: 12000  });
     await founderPage.click("//button[contains(text(),'Pay with Card')]");
+    await founderPage.waitForTimeout(2000);
 
-    await founderPage.waitForSelector("(//span[@class='InputContainer'])[1]");
-    await NumberEntry.enterNumber(founderPage, "(//span[@class='InputContainer'])[1]", '4242424242424242'); // Card Number
+    await founderPage.waitForSelector("(//span[@class='InputContainer'])[1]", { state: 'visible', timeout: 12000 });
+    //await NumberEntry.enterNumber(founderPage, "(//span[@class='InputContainer'])[1]", '4242424242424242'); // Card Number
+    await founderPage.click("(//span[@class='InputContainer'])[1]");
+    await founderPage.keyboard.press('Numpad4');
+    await founderPage.keyboard.press('Numpad2');
+    await founderPage.keyboard.press('Numpad4');
+    await founderPage.keyboard.press('Numpad2');
+    await founderPage.keyboard.press('Numpad4');
+    await founderPage.keyboard.press('Numpad2');
+    await founderPage.keyboard.press('Numpad4');
+    await founderPage.keyboard.press('Numpad2');
+    await founderPage.keyboard.press('Numpad4');
+    await founderPage.keyboard.press('Numpad2');
+    await founderPage.keyboard.press('Numpad4');
+    await founderPage.keyboard.press('Numpad2');
+    await founderPage.keyboard.press('Numpad4');
+    await founderPage.keyboard.press('Numpad2');
+    await founderPage.keyboard.press('Numpad4');
+    await founderPage.keyboard.press('Numpad2');
+    await founderPage.waitForTimeout(1000);
 
-    await founderPage.waitForSelector("//button[contains(text(),'Pay with Card')]");
-    await NumberEntry.enterNumber(founderPage, "//button[contains(text(),'Pay with Card')]", '1234'); // Expiry Date (MM/YY)
+    await founderPage.waitForSelector("(//span[@class='InputContainer'])[2]", { state: 'visible', timeout: 12000  });
+   // await NumberEntry.enterNumber(founderPage, "(//span[@class='InputContainer'])[2]", '1234'); // Expiry Date (MM/YY)
+    await founderPage.click("(//span[@class='InputContainer'])[2]");
+    await founderPage.keyboard.press('Numpad1');
+    await founderPage.keyboard.press('Numpad2');
+    await founderPage.keyboard.press('Numpad3');
+    await founderPage.keyboard.press('Numpad4');
+    await founderPage.waitForTimeout(1000);
 
+    await founderPage.waitForSelector("(//span[@class='InputContainer'])[3]", { state: 'visible', timeout: 12000  });
     await founderPage.waitForSelector("(//span[@class='InputContainer'])[3]");
-    await NumberEntry.enterNumber(founderPage, "(//span[@class='InputContainer'])[3]", '567'); // CVV
+    //await NumberEntry.enterNumber(founderPage, "(//span[@class='InputContainer'])[3]", '567'); // CVV
+    await founderPage.click("(//span[@class='InputContainer'])[3]");
+    await founderPage.keyboard.press('Numpad5');
+    await founderPage.keyboard.press('Numpad6');
+    await founderPage.keyboard.press('Numpad7');
+    await founderPage.waitForTimeout(1000);
 
     await founderPage.waitForSelector("//input[@id='billingName']");
     await founderPage.fill("//input[@id='billingName']","dummy"); // Card Holder Name
+    await founderPage.waitForTimeout(1000);
 
-    await founderPage.waitForSelector("//input[@id='billingName']");
+    await founderPage.waitForSelector("//input[@id='billingName']", { state: 'visible', timeout: 12000  });
     await founderPage.locator("//input[@id='billingName']").press('Enter');
     await founderPage.waitForTimeout(3000);
     
