@@ -3,7 +3,8 @@ import { NumberEntry } from '../utils/numberEnter';
 import { RandomWeightGenerator } from '../utils/randomWaitGenerator';
 import { generateFirstName, generateLastName, generateEmail, generateRandomPassword } from '../utils/userInfoGenerator';
 test('Lead to Confirmed automation flow of a founder', async () => {
-    test.setTimeout(300000);
+    
+    test.setTimeout(90000); // ## 1.5 Minutes Wait ##
 
     const browser = await chromium.launch({ headless: false });
     const page = await browser.newPage();
@@ -371,44 +372,17 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await page.waitForTimeout(2000);
 
     await page.waitForSelector("(//span[@class='InputContainer'])[1]", { state: 'visible', timeout: 12000 });
-    //await NumberEntry.enterNumber(page, "(//span[@class='InputContainer'])[1]", '4242424242424242'); // Card Number
-    await page.click("(//span[@class='InputContainer'])[1]");
-    await page.keyboard.press('Numpad4');
-    await page.keyboard.press('Numpad2');
-    await page.keyboard.press('Numpad4');
-    await page.keyboard.press('Numpad2');
-    await page.keyboard.press('Numpad4');
-    await page.keyboard.press('Numpad2');
-    await page.keyboard.press('Numpad4');
-    await page.keyboard.press('Numpad2');
-    await page.keyboard.press('Numpad4');
-    await page.keyboard.press('Numpad2');
-    await page.keyboard.press('Numpad4');
-    await page.keyboard.press('Numpad2');
-    await page.keyboard.press('Numpad4');
-    await page.keyboard.press('Numpad2');
-    await page.keyboard.press('Numpad4');
-    await page.keyboard.press('Numpad2');
+    await NumberEntry.enterNumber(page, "(//span[@class='InputContainer'])[1]", '4242424242424242'); // Card Number
     await page.waitForTimeout(1000);
 
     await page.waitForSelector("(//span[@class='InputContainer'])[2]", { state: 'visible', timeout: 12000  });
-   // await NumberEntry.enterNumber(page, "(//span[@class='InputContainer'])[2]", '1234'); // Expiry Date (MM/YY)
-    await page.click("(//span[@class='InputContainer'])[2]");
-    await page.keyboard.press('Numpad1');
-    await page.keyboard.press('Numpad2');
-    await page.keyboard.press('Numpad3');
-    await page.keyboard.press('Numpad4');
+    await NumberEntry.enterNumber(page, "(//span[@class='InputContainer'])[2]", '1234'); // Expiry Date (MM/YY)
     await page.waitForTimeout(1000);
 
     await page.waitForSelector("(//span[@class='InputContainer'])[3]", { state: 'visible', timeout: 12000  });
     await page.waitForSelector("(//span[@class='InputContainer'])[3]");
-    //await NumberEntry.enterNumber(page, "(//span[@class='InputContainer'])[3]", '567'); // CVV
-    await page.click("(//span[@class='InputContainer'])[3]");
-    await page.keyboard.press('Numpad5');
-    await page.keyboard.press('Numpad6');
-    await page.keyboard.press('Numpad7');
-    await page.waitForTimeout(1000);
-
+    await NumberEntry.enterNumber(page, "(//span[@class='InputContainer'])[3]", '567'); // CVV
+    
     await page.waitForSelector("//input[@id='billingName']");
     await page.fill("//input[@id='billingName']","dummy"); // Card Holder Name
     await page.waitForTimeout(1000);
