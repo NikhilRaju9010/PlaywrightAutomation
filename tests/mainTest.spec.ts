@@ -1,15 +1,26 @@
 import { test ,chromium} from '@playwright/test';
 import { NumberEntry } from '../utils/numberEnter';
 import { RandomWeightGenerator } from '../utils/randomWaitGenerator';
+import { ScreenshotsUtil } from '../utils/screenShotsUtil';
 import { generateFirstName, generateLastName, generateEmail, generateRandomPassword } from '../utils/userInfoGenerator';
 test('Lead to Confirmed automation flow of a founder', async () => {
-    
-    test.setTimeout(90000); // ## 1.5 Minutes Wait ##
+
+    test.setTimeout(300000); // ## 5 Minutes Wait ##
 
     const browser = await chromium.launch({ headless: false });
     const page = await browser.newPage();
 
+    //Screen Shots
+    const savePath = './screen-shots';
+    const browserName = 'chromium';
+
+    ScreenshotsUtil.createScreenshotDirectory(savePath);
+    const runFolder = ScreenshotsUtil.getRunFolder(savePath);
+    ScreenshotsUtil.createScreenshotDirectory(runFolder);
+
+
     await page.goto('https://startcouncil.org/join?target=11160',{ timeout: 120000 });
+    await ScreenshotsUtil.captureScreenshot(page, runFolder, 'Login Page', browserName);
     console.log("User landed on the FI login/signup page");
     const pageWaitTime = RandomWeightGenerator.getRandomWeight();
     await page.waitForTimeout(pageWaitTime);
@@ -193,6 +204,7 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await page.waitForSelector("//a[contains(text(),'Get Started')]");
     await page.click("//a[contains(text(),'Get Started')]");
     await page.waitForTimeout(1000);
+    await ScreenshotsUtil.captureScreenshot(page, runFolder, 'DNA test', browserName);
 
     // First loop for questions 1 to 2
     for (let questionNumber = 1; questionNumber <= 2; questionNumber++) {
@@ -285,6 +297,7 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await page.waitForTimeout(1000);
 
     await page.goto('https://startcouncil.org/admin/enrollmentmeta');
+    await ScreenshotsUtil.captureScreenshot(page, runFolder, 'Super_Admin_Login', browserName);
     await page.waitForTimeout(1000);
 
     await page.waitForSelector("//iframe[@id='embedded_iframe']", { state: 'visible' });
@@ -393,6 +406,7 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     
     await page.waitForSelector("(//div[@id='collapse_operating']/child::a)[1]");
     await page.click("(//div[@id='collapse_operating']/child::a)[1]");
+    await ScreenshotsUtil.captureScreenshot(page, runFolder, 'Enrolled Founder UI', browserName);
   
     const welcomeMsg = await page.textContent("(//h3)[1]");
     console.log(`* ${welcomeMsg} *`);
