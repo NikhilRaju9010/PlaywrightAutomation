@@ -1,9 +1,9 @@
 import { test ,chromium} from '@playwright/test';
-import { NumberEntry } from './numberEnter.spec';
-import { RandomWeightGenerator } from './randomWaitGenerator.spec';
-import { generateFirstName, generateLastName, generateEmail, generateRandomPassword } from './userInfoGenerator.spec';
+import { NumberEntry } from '../utils/numberEnter';
+import { RandomWeightGenerator } from '../utils/randomWaitGenerator';
+import { generateFirstName, generateLastName, generateEmail, generateRandomPassword } from '../utils/userInfoGenerator';
 test('Lead to Confirmed automation flow of a founder', async () => {
-    test.setTimeout(120000);
+    test.setTimeout(1200000);
 
     const browser = await chromium.launch({ headless: false });
     const page = await browser.newPage();
@@ -182,8 +182,8 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await page.waitForSelector("//button[contains(text(),'Submit Application')]", { state: 'visible' });
     await page.click("//button[contains(text(),'Submit Application')]");
     await page.waitForTimeout(1000);
-    await page.close(); // **<<<<< Delete this line to continue the DNA test >>>>>**
-/*
+    //await page.close(); // **<<<<< Delete this line to continue the DNA test >>>>>**
+
     // DNA Assessment
     await page.waitForSelector("//a[contains(text(),'Start the Assessment')]");
     await page.click("//a[contains(text(),'Start the Assessment')]");
@@ -253,14 +253,14 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await page.click("//h4[contains(text(),'See Next Steps')]");
     await page.waitForTimeout(1000);
 
-    await page.waitForSelector("/div[contains(text(),'Your Application to')]/preceding-sibling::div");
+    await page.waitForSelector("//div[contains(text(),'Your Application to')]/preceding-sibling::div");
     const userNameText = await page.textContent("//div[contains(text(),'Your Application to')]/preceding-sibling::div");
     await page.waitForSelector("//div[contains(text(),'Your Application to')]");
     const applicationNameText = await page.textContent("//div[contains(text(),'Your Application to')]");
     console.log(`* ${userNameText} <---> ${applicationNameText} *`);
 
     await browser.close();
-*/
+
     // SuperAdmin Login
     const adminBrowser = await chromium.launch({ headless: false });
     const adminPage = await adminBrowser.newPage();
@@ -423,3 +423,5 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     await founderPage.close();
 
 });
+
+//npx playwright test mainTest.spec.ts    ### to run the test
