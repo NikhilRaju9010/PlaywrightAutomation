@@ -3,7 +3,7 @@ import { NumberEntry } from '../utils/numberEnter';
 import { RandomWeightGenerator } from '../utils/randomWaitGenerator';
 import { generateFirstName, generateLastName, generateEmail, generateRandomPassword } from '../utils/userInfoGenerator';
 test('Lead to Confirmed automation flow of a founder', async () => {
-    test.setTimeout(1200000);
+    test.setTimeout(300000);
 
     const browser = await chromium.launch({ headless: false });
     const page = await browser.newPage();
