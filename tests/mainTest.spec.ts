@@ -9,6 +9,8 @@ test('Lead to Confirmed automation flow of a founder', async () => {
 
     const browser = await chromium.launch({ headless: false });
     const page = await browser.newPage();
+    
+    await page.setViewportSize({ width: 1920, height: 1080 });
 
     //Screen Shots
     const savePath = './screen-shots';
@@ -228,7 +230,7 @@ test('Lead to Confirmed automation flow of a founder', async () => {
     for (let questionNumber = 1; questionNumber <= 43; questionNumber++) {
         for (let buttonIndex = 2; buttonIndex <= 5; buttonIndex += 3) {
             const dynamicXPath = `(//div[contains(text(),'question ${questionNumber}')]/following::button)[${buttonIndex}]`;
-            console.log(`Clicking button for Question ${questionNumber}, Button Index ${buttonIndex}: ${dynamicXPath}`);
+            //console.log(`Clicking button for Question ${questionNumber}, Button Index ${buttonIndex}: ${dynamicXPath}`);
             
             const button = page.locator(dynamicXPath);
             await page.waitForSelector(dynamicXPath);
