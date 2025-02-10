@@ -1,0 +1,50 @@
+export const locators = {
+
+    pageURL: {
+        startcouncil:"https://startcouncil.org/join?target=11160",
+        dna: "",
+        next47: "",
+    },
+    loginPage: {
+        firstName: "//input[@name='user[first_name]']",
+        applyButton: "(//span[contains(text(),'Apply')])[1]",
+        lastName: "//input[@name='user[last_name]']",
+        userEmail : "//input[@name='user[email]' and @id='top_email']",
+        userPassword : "//input[@name='user[password]' and @id='top_password']",
+        ideaState : "//select[@id='top_idea_state_cd']",
+        applyToCohort : "(//div[contains(text(),'or Apply with')]/preceding::input)[13]",
+    },
+    applicationQuestions: {
+        highest_level_of_education: "//select[@id='user_education_cd']",
+        years_of_professional_experience: "//select[@id='user_professional_experience_cd",
+        years_of_startUp_experience: "//select[@id='user_start_up_experience_cd']",
+        years_of_experience_on_idea: "//select[@id='user_idea_field_experience_cd']",
+        working_hours_per_week_on_idea:"//select[@id='user_working_hrs_on_idea_cd']",
+        team_size:"//select[@id='user_team_size_cd']",
+        working_together:"//select[@id='user_team_working_hrs']",
+        technical_experience_team:"//select[@id='user_team_tech_experience']",
+        team_members_with_business_experience:"//select[@id='user_team_business_experience']",
+        business_already_incorporated:"//select[@id='user_business_incorporated']",
+        primary_skill_set:"//select[@id='user_primary_skill_cd']",
+        Describe_your_startup:"//textarea[@id='user_field_2']",
+        Sustainable_Development_Goal:"//select[@name='user[idea_align]']",
+        positive_impact_on_idea:"//textarea[@name='user[idea_and_positive_impact]']",
+        primary_industry:"//select[@name='user[primary_industry]']",
+        secondary_industry:"//select[@name='user[secondary_industry]']",
+        primary_help:"//select[@name='user[primary_help]']",
+        secondary_help:"//select[@name='user[secondary_help]']",
+        continue_button:"//button[contains(text(),'Continue')]"
+    },
+    personalInformation: {
+        gender:"//select[@id='user_gender']",
+        phone_Number: "//input[@id='user_phone_number_tmp']",
+        LinkedIn: "//input[@id='user_linkedin_website']",
+        city:"//input[@id='location_city']",
+        Country_of_residence:"//input[@id='location_country']",
+        Country_of_Origin:"(//span[@class='selection'])[2]",
+        Company_Name:"//input[@id='company_name']",
+        how_you_heard_about:"//select[@id='user_source_3']",
+        how_you_heard_about_more:"//input[@id='user_source_1']",
+        submit_application_button: "//button[contains(text(),'Submit Application')]",
+    }
+};
