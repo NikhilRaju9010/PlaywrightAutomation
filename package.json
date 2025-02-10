@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.50.1",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
     "lodash": "^4.17.21",
