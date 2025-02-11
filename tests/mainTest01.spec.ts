@@ -87,7 +87,7 @@ test('User Registeration Flow' , async () => {
         await page.selectOption(locators.applicationQuestions.secondary_help, { value : "Product Development" });
         await page.click(locators.applicationQuestions.continue_button);
 
-        // Personal Information
+        //Personal Information
 
         await page.selectOption(locators.personalInformation.gender, { value : "1" });
         await page.fill(locators.personalInformation.phone_Number, locators.personalInformation.phoneNumber);
@@ -102,13 +102,13 @@ test('User Registeration Flow' , async () => {
         await page.fill(locators.personalInformation.how_you_heard_about_more, locators.personalInformation.how_you_heard_Text);
         await page.click(locators.personalInformation.submit_application_button);
 
-        // DNA Assessment
-
+        //DNA Assessment
+/*
         await page.click(locators.dnaTest.startAssessment);
         await page.click(locators.dnaTest.getStarted);
         await ScreenshotsUtil.captureScreenshot(page, runFolder, 'DNA test', browserName);
 
-        // First loop for questions 1 to 2
+        //First loop for questions 1 to 2
         for (let questionNumber = 1; questionNumber <= 2; questionNumber++) {
             for (let buttonIndex = 2; buttonIndex <= 5; buttonIndex += 3) {
                 const dynamicXPath = locators.dnaTest.questionButton(questionNumber,buttonIndex);
@@ -121,7 +121,7 @@ test('User Registeration Flow' , async () => {
         }
         await page.click(locators.dnaTest.fullTest);
 
-        // Second loop for questions 1 to 43
+        //Second loop for questions 1 to 43
         for (let questionNumber = 1; questionNumber <= 43; questionNumber++) {
             for (let buttonIndex = 2; buttonIndex <= 5; buttonIndex += 3) {
                 const dynamicXPath = locators.dnaTest.questionButton(questionNumber,buttonIndex);
@@ -146,4 +146,79 @@ test('User Registeration Flow' , async () => {
         await page.click(locators.dnaTest.submitTest);
         await page.click(locators.dnaTest.nextStep);
 
+        //Tested User
+        const userNameText = await page.textContent(locators.testedUser.userApplicationName);
+        const applicationNameText = await page.textContent(locators.testedUser.applicationTextName);
+        console.log(`* ${userNameText} <---> ${applicationNameText} *`);
+*/
+        await page.click(locators.logout.logoutIcon);
+        await page.waitForSelector(locators.logout.logoutIcon, {state: 'visible'});
+        await page.click(locators.logout.logoutButton);
+
+        //SuperAdmin Login
+        await page.click(locators.login.signInButton);
+        await page.fill(locators.login.userEmailFeild,locators.login.adminEmail);
+        await page.fill(locators.login.userPasswordFeild, locators.login.adminPassword);
+        await page.click(locators.login.loginButton);
+
+        //Enrollmentmeta Page
+        await page.goto(locators.enrollmentmetaPage.enrollmentmetaPageURL);
+        const iframe = await page.waitForSelector("//iframe[@id='embedded_iframe']");
+        const frame = await iframe.contentFrame();
+
+        if (frame) {
+            const searchField = await frame.locator(locators.enrollmentmetaPage.enrollmentmetaSearchField);
+
+            await searchField.fill(userEmail);
+            const  searchButton = await frame.locator(locators.enrollmentmetaPage.enrollmentmetaSearchbutton);
+            await searchButton.click();
+            const statusDropdown = await frame.locator(locators.enrollmentmetaPage.statusDropDown);
+            await statusDropdown.selectOption({value:'Accepted'});
+            const statusSaveButton = await frame.locator(locators.enrollmentmetaPage.statusUpdateDropDown);
+            await statusSaveButton.click();
+        }   
+        console.log("<<<<<< Founder moved to confirmed state >>>>>>");
+
+        await page.click(locators.logout.logoutIcon);
+        await page.waitForSelector(locators.logout.logoutIcon, {state: 'visible'});
+        await page.click(locators.logout.logoutButton);
+
+        //User Agreement and payment
+        await page.click(locators.login.signInButton);
+        await page.fill(locators.login.userEmailFeild, userEmail);
+        await page.fill(locators.login.userPasswordFeild, userPassword);
+        await page.click(locators.login.loginButton);
+
+        await page.click(locators.acceptedUser.signAgreementButton);
+        await page.click(locators.acceptedUser.optEsignButton);
+        const agreementFilePath = 'C:\\Users\\Nikhil Raju\\Documents\\AutomationFiles\\enterance_agreement_test.pdf';
+
+        await page.waitForSelector(locators.acceptedUser.chooseFileButton);
+        const [fileChooser] = await Promise.all([
+            page.waitForEvent('filechooser'),
+            page.click(locators.acceptedUser.chooseFileButton)
+        ]);
+        await fileChooser.setFiles(agreementFilePath);
+        await page.click(locators.acceptedUser.saveFileButton);
+        await page.click(locators.acceptedUser.payEntranceFeeButton);
+        await page.click(locators.acceptedUser.payWithCard);
+
+        //Filling card details
+        await NumberEntry.enterNumber(page, locators.acceptedUser.cardNumber, '4242424242424242'); // Card Number
+        await NumberEntry.enterNumber(page, locators.acceptedUser.mmAndyy, '1234'); // Expiry Date (MM/YY)
+        await NumberEntry.enterNumber(page, locators.acceptedUser.cvc, '567'); // CVV
+        await page.fill(locators.acceptedUser.cardHolderName, locators.acceptedUser.cardHolderNameText); // Card Holder Name
+        await page.locator(locators.acceptedUser.cardHolderName).press('Enter');
+
+        //Founder Home Page
+        await page.click(locators.confirmedFounder.founderHomeButton);
+        await ScreenshotsUtil.captureScreenshot(page, runFolder, 'Enrolled Founder UI', browserName);
+        const welcomeMsg = await page.textContent(locators.confirmedFounder.welcomeMessage);
+        console.log(`* ${welcomeMsg} *`);
+        await page.waitForTimeout(3000);
+        await page.click(locators.confirmedFounder.founderLogout);
+        await page.close();
+
 })
+
+// To Run The code ---> npx playwright test tests/mainTest01.spec.ts

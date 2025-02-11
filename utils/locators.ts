@@ -57,12 +57,6 @@ export const locators = {
         how_you_heard_Text:"Groups",
         submit_application_button: "//button[contains(text(),'Submit Application')]",
     },
-    testedUser:{
-        userApplicationName:"//div[contains(text(),'Your Application to')]/preceding-sibling::div",
-        applicationTextName:"//div[contains(text(),'Your Application to')]",
-        logoutIcon:"//i[@class='fi-icon-user']",
-        logoutButton:"//div[contains(text(),'Logout')]",
-    },
     dnaTest:{
         startAssessment:"//a[contains(text(),'Start the Assessment')]",
         getStarted:"//a[contains(text(),'Get Started')]",
@@ -76,7 +70,47 @@ export const locators = {
         submitTest:"//button[contains(text(),'Submit and view report')]",
         nextStep:"//h4[contains(text(),'See Next Steps')]",
     },
-    
-    
+    testedUser:{
+        userApplicationName:"//div[contains(text(),'Your Application to')]/preceding-sibling::div",
+        applicationTextName:"//div[contains(text(),'Your Application to')]",
+    },
+    logout:{
+        logoutIcon:"//i[@class='fi-icon-user']",
+        logoutButton:"//div[contains(text(),'Logout')]",
+    },
+    login:{
+        signInButton:"//span[contains(text(),'Sign in')]",
+        userEmailFeild:"//input[@name='user[email]' and @id='#form_email_address']",
+        adminEmail:"bv@fi.co",
+        userPasswordFeild:"//input[@name='user[password]' and @placeholder='Password']",
+        adminPassword:"qwerty@fiqa",
+        loginButton:"//span[contains(text(),'Login')]",
+    },
+    enrollmentmetaPage:{
+        enrollmentmetaPageURL:"https://startcouncil.org/admin/enrollmentmeta",
+        enrollmentmetaIframe:"//iframe[@id='embedded_iframe']",
+        enrollmentmetaSearchField:"//input[@id='user_name']",
+        enrollmentmetaSearchbutton:"//input[@value='Search']",
+        statusDropDown:"(//div[@id='search']/child::form/child::div/child::select)[1]",
+        statusUpdateDropDown:"//div[@id='search']/child::form/child::div/child::select/following-sibling::input",
+    },
+    acceptedUser:{
+        signAgreementButton:"//a[contains(text(),'Sign the Entrance Agreement')]",
+        optEsignButton:"(//div[contains(text(),'Review and Sign')]/following-sibling::div/following::button)[1]",
+        chooseFileButton:"(//div[contains(text(),'Upload the signed')]/following::input)[1]",
+        saveFileButton:"(//div[contains(text(),'Upload the signed')]/following::input)[2]",
+        payEntranceFeeButton:"//button[contains(text(),'Pay the Entrance Fee')]",
+        payWithCard:"//button[contains(text(),'Pay with Card')]",
+        cardNumber:"(//span[@class='InputContainer'])[1]",
+        mmAndyy:"(//span[@class='InputContainer'])[2]",
+        cvc:"(//span[@class='InputContainer'])[3]",
+        cardHolderName:"//input[@id='billingName']",
+        cardHolderNameText:"dummy",
+    },
+    confirmedFounder:{
+        founderHomeButton:"(//div[@id='collapse_operating']/child::a)[1]",
+        welcomeMessage:"(//h3)[1]",
+        founderLogout:"//span[contains(text(),'Log out')]",
+    }
 
 };
