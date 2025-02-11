@@ -8,28 +8,33 @@ on:
     branches:
       - main 
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true  
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18  # Use Node.js 18
+          node-version: 18 
 
       - name: Install dependencies
-        run: npm install  # Installs all dependencies from package.json
+        run: npm install
 
       - name: Install Playwright browsers
         run: npx playwright install 
 
       - name: Run Playwright tests
-        run: npx playwright test tests/mainTest01.spec.ts 
-
+        run: npx playwright test tests/mainTest01.spec.ts
+        continue-on-error: false 
       - name: Upload Playwright Test Report
-        if: always()
+        if: failure() || success()  
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
