@@ -87,6 +87,7 @@ test('User Registeration Flow' , async () => {
         await page.selectOption(locators.applicationQuestions.primary_help, { value : "Improving My Idea/ Strategy" });
         await page.selectOption(locators.applicationQuestions.secondary_help, { value : "Product Development" });
         await page.click(locators.applicationQuestions.continue_button);
+        console.log('Applications questions filled successfully');
 
         //Personal Information
 
@@ -102,6 +103,7 @@ test('User Registeration Flow' , async () => {
         await page.selectOption(locators.personalInformation.how_you_heard_about, {value : "Facebook"});
         await page.fill(locators.personalInformation.how_you_heard_about_more, locators.personalInformation.how_you_heard_Text);
         await page.click(locators.personalInformation.submit_application_button);
+        console.log('Personal Information filled successfully');
 
         //DNA Assessment
 
@@ -161,6 +163,8 @@ test('User Registeration Flow' , async () => {
         await page.fill(locators.login.userEmailFeild,locators.login.adminEmail);
         await page.fill(locators.login.userPasswordFeild, locators.login.adminPassword);
         await page.click(locators.login.loginButton);
+        console.log('SuperAdmin logged in successfully');
+
 
         //Enrollmentmeta Page
         await page.goto(locators.enrollmentmetaPage.enrollmentmetaPageURL);
@@ -203,6 +207,8 @@ test('User Registeration Flow' , async () => {
         await page.click(locators.acceptedUser.saveFileButton);
         await page.click(locators.acceptedUser.payEntranceFeeButton);
         await page.click(locators.acceptedUser.payWithCard);
+        console.log('User signed the agreement and paid the entrance fee');
+
 
         //Filling card details
         await NumberEntry.enterNumber(page, locators.acceptedUser.cardNumber, '4242424242424242'); // Card Number
