@@ -115,7 +115,6 @@ test('User Registeration Flow' , async () => {
                 console.log(locators.dnaTest.questionButton(questionNumber,buttonIndex));
                 
                 const button = page.locator(dynamicXPath);
-                await page.waitForSelector(dynamicXPath);
                 await button.waitFor({ state: 'visible' });    
                 await button.click();
             }
@@ -128,7 +127,6 @@ test('User Registeration Flow' , async () => {
                 const dynamicXPath = locators.dnaTest.questionButton(questionNumber,buttonIndex);
                 
                 const button = page.locator(dynamicXPath);
-                await page.waitForSelector(dynamicXPath);
                 await button.waitFor({ state: 'visible' });    
                 await button.click();
             }
@@ -137,9 +135,13 @@ test('User Registeration Flow' , async () => {
         await page.click(locators.dnaTest.imageAnswer);
         await page.click(locators.dnaTest.testContinue);
 
-        for (let i = 1; i <= 11; i++) {
-            await page.waitForSelector(locators.dnaTest.imageAnswer);
-            await page.click(locators.dnaTest.imageAnswer);
+        //Third loop for question 44 to 54
+        for (let imageQuestionNumber = 44; imageQuestionNumber <= 54; imageQuestionNumber++) {
+                const dynamicXPath = locators.dnaTest.imageQuestionButton(imageQuestionNumber,);
+                
+                const button = page.locator(dynamicXPath);
+                await button.waitFor({ state: 'visible' });    
+                await button.click();
         }
         await page.click(locators.dnaTest.submitTest);
         await page.click(locators.dnaTest.nextStep);

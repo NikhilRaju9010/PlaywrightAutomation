@@ -68,7 +68,8 @@ export const locators = {
         getStarted:"//a[contains(text(),'Get Started')]",
         questionButton: (questionNumber: number , buttonIndex: number) =>  
       `(//div[contains(text(),'question ${questionNumber}')]/following::button)[${buttonIndex}]`,
-
+        imageQuestionButton :(imageQuestionNumber: number) => 
+            `(//div[contains(text(),'question ${imageQuestionNumber}')]/following::div)[24]`,
         fullTest:"//button[contains(text(),'Start the full test')]",
         testContinue:"//button[contains(text(),'Continue')]",
         imageAnswer:"//div[@data-answer='3']",
