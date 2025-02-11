@@ -16,7 +16,7 @@ export const locators = {
     },
     applicationQuestions: {
         highest_level_of_education: "//select[@id='user_education_cd']",
-        years_of_professional_experience: "//select[@id='user_professional_experience_cd",
+        years_of_professional_experience: "//select[@id='user_professional_experience_cd']",
         years_of_startUp_experience: "//select[@id='user_start_up_experience_cd']",
         years_of_experience_on_idea: "//select[@id='user_idea_field_experience_cd']",
         working_hours_per_week_on_idea:"//select[@id='user_working_hrs_on_idea_cd']",
@@ -27,8 +27,10 @@ export const locators = {
         business_already_incorporated:"//select[@id='user_business_incorporated']",
         primary_skill_set:"//select[@id='user_primary_skill_cd']",
         Describe_your_startup:"//textarea[@id='user_field_2']",
+        AboutMyStartup:"Write 1-­2 paragraphs describing your startup idea",
         Sustainable_Development_Goal:"//select[@name='user[idea_align]']",
         positive_impact_on_idea:"//textarea[@name='user[idea_and_positive_impact]']",
+        positiveImpact:"Write 1-­2 paragraphs describing your startup idea",
         primary_industry:"//select[@name='user[primary_industry]']",
         secondary_industry:"//select[@name='user[secondary_industry]']",
         primary_help:"//select[@name='user[primary_help]']",
@@ -38,13 +40,42 @@ export const locators = {
     personalInformation: {
         gender:"//select[@id='user_gender']",
         phone_Number: "//input[@id='user_phone_number_tmp']",
+        phoneNumber: "2015551234",
         LinkedIn: "//input[@id='user_linkedin_website']",
+        linkedinURL:"https://linked.com",
         city:"//input[@id='location_city']",
+        cityName:"Bali",
         Country_of_residence:"//input[@id='location_country']",
+        residenceName:"Indonesia",
         Country_of_Origin:"(//span[@class='selection'])[2]",
+        countrySearch:"//input[@class='select2-search__field']",
+        countreySelect:"Algeria",
         Company_Name:"//input[@id='company_name']",
+        nameOfCompany:"Automation",
         how_you_heard_about:"//select[@id='user_source_3']",
         how_you_heard_about_more:"//input[@id='user_source_1']",
+        how_you_heard_Text:"Groups",
         submit_application_button: "//button[contains(text(),'Submit Application')]",
-    }
+    },
+    testedUser:{
+        userApplicationName:"//div[contains(text(),'Your Application to')]/preceding-sibling::div",
+        applicationTextName:"//div[contains(text(),'Your Application to')]",
+        logoutIcon:"//i[@class='fi-icon-user']",
+        logoutButton:"//div[contains(text(),'Logout')]",
+    },
+    dnaTest:{
+        startAssessment:"//a[contains(text(),'Start the Assessment')]",
+        getStarted:"//a[contains(text(),'Get Started')]",
+        questionButton: (questionNumber: number , buttonIndex: number) =>  
+      `(//div[contains(text(),'question ${questionNumber}')]/following::button)[${buttonIndex}]`,
+
+        fullTest:"//button[contains(text(),'Start the full test')]",
+        testContinue:"//button[contains(text(),'Continue')]",
+        imageAnswer:"//div[@data-answer='3']",
+        submitTest:"//button[contains(text(),'Submit and view report')]",
+        nextStep:"//h4[contains(text(),'See Next Steps')]",
+    },
+    
+    
+
 };
