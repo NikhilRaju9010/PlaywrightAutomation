@@ -9,7 +9,8 @@ test('User Registeration Flow' , async () => {
 
     test.setTimeout(300000); // ## 5 Minutes Wait ##
 
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
+    
     const page = await browser.newPage();
 
     await page.setViewportSize({ width: 1920, height: 1080 });
@@ -103,7 +104,7 @@ test('User Registeration Flow' , async () => {
         await page.click(locators.personalInformation.submit_application_button);
 
         //DNA Assessment
-/*
+
         await page.click(locators.dnaTest.startAssessment);
         await page.click(locators.dnaTest.getStarted);
         await ScreenshotsUtil.captureScreenshot(page, runFolder, 'DNA test', browserName);
@@ -150,7 +151,7 @@ test('User Registeration Flow' , async () => {
         const userNameText = await page.textContent(locators.testedUser.userApplicationName);
         const applicationNameText = await page.textContent(locators.testedUser.applicationTextName);
         console.log(`* ${userNameText} <---> ${applicationNameText} *`);
-*/
+
         await page.click(locators.logout.logoutIcon);
         await page.waitForSelector(locators.logout.logoutIcon, {state: 'visible'});
         await page.click(locators.logout.logoutButton);
