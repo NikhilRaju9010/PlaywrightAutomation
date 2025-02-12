@@ -9,7 +9,9 @@ test('User Registeration Flow' , async () => {
 
     test.setTimeout(300000); // ## 5 Minutes Wait ##
 
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({ 
+        headless: process.env.CI ? true : false
+      });
     
     const page = await browser.newPage();
 
@@ -148,6 +150,7 @@ test('User Registeration Flow' , async () => {
         }
         await page.click(locators.dnaTest.submitTest);
         await page.click(locators.dnaTest.nextStep);
+        console.log('DNA test completed successfully');
 
         //Tested User
         const userNameText = await page.textContent(locators.testedUser.userApplicationName);
