@@ -31,8 +31,11 @@ jobs:
         run: npx playwright install 
 
       - name: Run Playwright tests
+        env:
+          CI: true
         run: npx playwright test tests/mainTest01.spec.ts
         continue-on-error: false 
+        
       - name: Upload Playwright Test Report
         if: failure() || success()  
         uses: actions/upload-artifact@v4
