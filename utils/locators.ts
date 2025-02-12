@@ -4,6 +4,7 @@ export const locators = {
         startcouncil:"https://startcouncil.org/join?target=11160",
         dna: "",
         next47: "",
+    
     },
     loginPage: {
         firstName: "//input[@name='user[first_name]']",
@@ -111,6 +112,19 @@ export const locators = {
         founderHomeButton:"(//div[@id='collapse_operating']/child::a)[1]",
         welcomeMessage:"(//h3)[1]",
         founderLogout:"//span[contains(text(),'Log out')]",
+    },
+    adminSemesterPage:{
+        adminSemesterPageURL:"https://startcouncil.org/admin/semester/11160",
+        acceleratorKickoffSession:"(//span[contains(text(),'Accelerator Kickoff')]/following::i)[1]",
+        monthDropDown:"(//div[contains(text(),'Accelerator Kickoff')]/following::select[@class='flatpickr-monthDropdown-months'])[1]",
+        dateSelect: (newDate : string) =>  
+            `(//div[contains(text(),'Accelerator Kickoff')]/following::span[contains(text(),'${newDate}')])[1]`,
+        yearSelect:"(//div[contains(text(),'Accelerator Kickoff')]/following::input[@aria-label='Year'])[1]",
+        timeHours:"(//div[contains(text(),'Accelerator Kickoff')]/following::input[@type='number'])[2]",
+        timeMinutes:"(//div[contains(text(),'Accelerator Kickoff')]/following::input[@type='number'])[3]",
+        savetimeAndDate:"//div[contains(text(),'Accelerator Kickoff')]/following::input[@name='commit']",
+        recruitingText:"((//span[contains(text(),'Dashboard')])[3]/following::span)[2]"
+
     }
 
 };
