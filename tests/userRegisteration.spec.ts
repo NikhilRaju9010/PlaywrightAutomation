@@ -171,7 +171,7 @@ test('User Registeration Flow' , async () => {
 
         //Enrollmentmeta Page
         await page.goto(locators.enrollmentmetaPage.enrollmentmetaPageURL);
-        const iframe = await page.waitForSelector("//iframe[@id='embedded_iframe']");
+        const iframe = await page.waitForSelector(locators.enrollmentmetaPage.enrollmentmetaIframe);
         const frame = await iframe.contentFrame();
 
         if (frame) {
@@ -221,7 +221,7 @@ test('User Registeration Flow' , async () => {
         await page.locator(locators.acceptedUser.cardHolderName).press('Enter');
 
         //Founder Home Page
-        await page.click(locators.confirmedFounder.founderHomeButton);
+        await page.click(locators.confirmedFounder.navbarHomeButton);
         await ScreenshotsUtil.captureScreenshot(page, runFolder, 'Enrolled Founder UI', browserName);
         const welcomeMsg = await page.textContent(locators.confirmedFounder.welcomeMessage);
         console.log(`* ${welcomeMsg} *`);
@@ -231,5 +231,5 @@ test('User Registeration Flow' , async () => {
 
 })
 
-// To Run The code ---> npx playwright test tests/mainTest01.spec.ts
-// new Run
+// To Run The code ---> npx playwright test tests/userRegisteration.spec.ts
+// To Run The code in headless mode ---> npx playwright test tests/userRegisteration.spec.ts --headed

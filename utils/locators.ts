@@ -109,9 +109,18 @@ export const locators = {
         cardHolderNameText:"dummy",
     },
     confirmedFounder:{
-        founderHomeButton:"(//div[@id='collapse_operating']/child::a)[1]",
+        navbarHomeButton:"(//div[@id='collapse_operating']/child::a)[1]",
         welcomeMessage:"(//h3)[1]",
         founderLogout:"//span[contains(text(),'Log out')]",
+        navbarAllSprintsButton:"(//a[text()='All Sprints'])[1]",
+        sessiosnViewSprintButton:(sessionName: string) =>
+            `(//h2[text()='${sessionName}']/following::span[text()='View sprint'])[1]`,
+        sessionEditAllButton:"//span[text()='Edit all']",
+        deliverablesInputFeild:"//trix-editor[@data-auto-save-target='editor']",
+        deliverablesUpdateButton:"(//trix-editor/following::span)[1]",
+        deliverablesWelcomeButton:"//button[text()='Okay!']",
+        resourcesButton:"//button[@x-show='showCommonResource']",
+
     },
     adminSemesterPage:{
         adminSemesterPageURL:"https://startcouncil.org/admin/semester/11160",
@@ -119,12 +128,38 @@ export const locators = {
         monthDropDown:"(//div[contains(text(),'Accelerator Kickoff')]/following::select[@class='flatpickr-monthDropdown-months'])[1]",
         dateSelect: (newDate : string) =>  
             `(//div[contains(text(),'Accelerator Kickoff')]/following::span[contains(text(),'${newDate}')])[1]`,
+        sessionDateSelect: (sessionName: string ,newDate : string) =>  
+            `(//div[contains(text(),'${sessionName}')]/following::span[contains(text(),'${newDate}')])[1]`,
+        sessionDateIcon:(sessionName: string) =>
+        `//span[text()='${sessionName}']`,
+        sessionMonthSelect:(sessionName: string) =>
+            `(//div[text()='${sessionName}']/following::select[@class='flatpickr-monthDropdown-months'])[1]`,
+        sessionYearSelect:(sessionName: string) =>
+            `(//span[text()='${sessionName}']/following::input[@aria-label="Year"])[1]`,
+        sessionTimeHours:(sessionName: string) =>
+            `(//span[text()='${sessionName}']/following::input[@type="number"])[2]`,
+        sessionTimeMinutes:(sessionName: string) =>
+            `(//span[text()='${sessionName}']/following::input[@type="number"])[3]`,
+        sessionSaveButton:(sessionName: string) =>
+            `(//span[text()='${sessionName}']/following::input[@name="commit"])[1]`,
         yearSelect:"(//div[contains(text(),'Accelerator Kickoff')]/following::input[@aria-label='Year'])[1]",
         timeHours:"(//div[contains(text(),'Accelerator Kickoff')]/following::input[@type='number'])[2]",
         timeMinutes:"(//div[contains(text(),'Accelerator Kickoff')]/following::input[@type='number'])[3]",
         savetimeAndDate:"//div[contains(text(),'Accelerator Kickoff')]/following::input[@name='commit']",
-        recruitingText:"((//span[contains(text(),'Dashboard')])[3]/following::span)[2]"
+        recruitingText:"((//span[contains(text(),'Dashboard')])[3]/following::span)[2]",
+        semesterNameAndID:"((//div[contains(text(),'Semester')])[2]/following::div)[1]",
+    },
+    adminNewSemesterPage:{
+        adminNewSemesterPageURL:"https://startcouncil.org/admin/new_semester",
+        newSemesterIframe:"//iframe[@id='embedded_iframe']",
+        semesterCity:"//select[@id='city']",
+        semesterName:"(//div[@id='item']/child::input)[1]",
+        acceleratorName:"//input[@id='semester_accelerator_name']",
+        programFormat:"//select[@id='semester_program_format']",
+        programType:"//select[@id='semester_program_type']",
+        createSemester:"(//input[@type='submit'])[1]",
 
     }
+    
 
 };

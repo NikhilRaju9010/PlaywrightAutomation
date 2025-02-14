@@ -2,7 +2,7 @@ import { test ,chromium} from '@playwright/test';
 import { locators } from '../utils/locators';
 import {getFutureDate} from '../utils/getFutureDate';
 
-test('User Registeration Flow' , async () => {
+test('Converting a semester to Recruiting' , async () => {
 
         test.setTimeout(300000); // ## 5 Minutes Wait ##
 
