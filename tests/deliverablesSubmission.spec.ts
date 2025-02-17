@@ -22,7 +22,7 @@ test('Session Deliverables Submission' , async () => {
 
         await page.click(locators.confirmedFounder.navbarAllSprintsButton);
         await page.waitForTimeout(5000);
-        await page.click(locators.confirmedFounder.sessiosnViewSprintButton(sessionList.session03));
+        await page.click(locators.confirmedFounder.sessiosnViewSprintButton(sessionList.session01));
         await page.click(locators.confirmedFounder.deliverablesWelcomeButton);
         await page.click(locators.confirmedFounder.resourcesButton);
         //await page.click(locators.confirmedFounder.sessionEditAllButton);
@@ -65,10 +65,11 @@ test('Session Deliverables Submission' , async () => {
             console.log(`Clicking Update Button ${i}`);
             await buttonLocator.click();
 
-            await page.waitForLoadState('networkidle');
+            await page.waitForLoadState('domcontentloaded');
+            await page.waitForLoadState('load');
             await page.waitForTimeout(2000);
             if (i === deliverablesCount) {
-                console.log('All Deliverables Submitted Successfully');
+                console.log(`All Deliverables Submitted Successfully ${sessionList.session01}`);
             }
         }
         await page.waitForTimeout(5000);
