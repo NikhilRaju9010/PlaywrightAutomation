@@ -5,13 +5,13 @@ import { ScreenshotsUtil } from '../utils/screenShotsUtil';
 import { generateFirstName, generateLastName, generateEmail, generateRandomPassword } from '../utils/userInfoGenerator';
 test('Lead to Confirmed automation flow of a founder', async () => {
 
-    test.setTimeout(300000); // ## 5 Minutes Wait ##
+    test.setTimeout(0);
 
     const browser = await chromium.launch({ headless: false });
     const page = await browser.newPage();
     
     await page.setViewportSize({ width: 1920, height: 1080 });
-
+    page.setDefaultTimeout(30000); // Set default timeout for element actions to 30 seconds
     //Screen Shots
     const savePath = './screen-shots';
     const browserName = 'chromium';

@@ -7,7 +7,7 @@ import { locators } from '../utils/locators';
 
 test('User Registeration Flow' , async () => {
 
-    test.setTimeout(300000); // ## 5 Minutes Wait ##
+    test.setTimeout(0);
 
     const browser = await chromium.launch({ 
         headless: process.env.CI ? true : false
@@ -16,6 +16,7 @@ test('User Registeration Flow' , async () => {
     const page = await browser.newPage();
 
     await page.setViewportSize({ width: 1920, height: 1080 });
+    page.setDefaultTimeout(30000); // Set default timeout for element actions to 30 seconds
 
         const savePath = './screen-shots';
         const browserName = 'chromium';

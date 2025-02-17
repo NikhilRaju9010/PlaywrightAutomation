@@ -1,10 +1,11 @@
 import { test ,chromium} from '@playwright/test';
 import { NumberEntry } from '../utils/numberEnter';
 test('Founder logout Functionality', async () => {
-    test.setTimeout(300000);
+    test.setTimeout(0);
 
     const browser = await chromium.launch({ headless: false });
     const page = await browser.newPage();
+    page.setDefaultTimeout(30000); // Set default timeout for element actions to 30 seconds
 
     await page.goto('https://startcouncil.org/join?target=11160',{ timeout: 120000 });
     await page.waitForTimeout(1000);

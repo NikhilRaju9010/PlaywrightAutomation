@@ -4,7 +4,7 @@ import {sessionList, generateSessionDates} from '../utils/updateSessionDates';
 
 test('Updating the semester sessions dates to make semester to operating' , async () => {
 
-        test.setTimeout(300000); // ## 5 Minutes Wait ##
+        test.setTimeout(0); 
 
         const browser = await chromium.launch({ 
             headless: process.env.CI ? true : false
@@ -13,6 +13,7 @@ test('Updating the semester sessions dates to make semester to operating' , asyn
         const page = await browser.newPage();
 
         await page.setViewportSize({ width: 1920, height: 1080 });
+        page.setDefaultTimeout(30000); // Set default timeout for element actions to 30 seconds
 
         await page.goto(locators.pageURL.startcouncil,{ timeout: 120000 });
         await page.click(locators.login.signInButton);

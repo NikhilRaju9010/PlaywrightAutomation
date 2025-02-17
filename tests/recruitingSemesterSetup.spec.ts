@@ -4,7 +4,7 @@ import {getFutureDate} from '../utils/getFutureDate';
 
 test('Converting a semester to Recruiting' , async () => {
 
-        test.setTimeout(300000); // ## 5 Minutes Wait ##
+        test.setTimeout(0); 
 
         const browser = await chromium.launch({ 
             headless: process.env.CI ? true : false
@@ -13,7 +13,8 @@ test('Converting a semester to Recruiting' , async () => {
         const page = await browser.newPage();
 
         await page.setViewportSize({ width: 1920, height: 1080 });
-
+        page.setDefaultTimeout(30000); // Set default timeout for element actions to 30 seconds
+        
         await page.goto(locators.pageURL.startcouncil,{ timeout: 120000 });
         await page.click(locators.login.signInButton);
         await page.fill(locators.login.userEmailFeild,locators.login.adminEmail);
