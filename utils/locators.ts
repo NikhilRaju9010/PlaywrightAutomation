@@ -117,9 +117,13 @@ export const locators = {
             `(//h2[text()='${sessionName}']/following::span[text()='View sprint'])[1]`,
         sessionEditAllButton:"//span[text()='Edit all']",
         deliverablesInputFeild:"//trix-editor[@data-auto-save-target='editor']",
-        deliverablesUpdateButton:"(//trix-editor/following::span)[1]",
+        deliverablesUpdateButton: "(//span[text()='Submit'])",
         deliverablesWelcomeButton:"//button[text()='Okay!']",
         resourcesButton:"//button[@x-show='showCommonResource']",
+        deliverablesCount:"(//a[@data-method='get'])",
+        expandAllBtn:"(//span[text()='Expand all'])[1]",
+        addAnswer:(questionNumber: number) =>
+            `(//a[@data-method='get'])[${questionNumber}]`,
 
     },
     adminSemesterPage:{
