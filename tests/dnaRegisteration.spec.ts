@@ -38,6 +38,8 @@ test('DNA User Registeration' , async () => {
     await page.click(locators.dnaRegisteration.startAssessmentButton);
     await page.waitForSelector(locators.dnaRegisteration.regConfirmation,{state: 'visible'});
     console.log('User registered successfully');
+    console.log(`User Name : ${userFirstName}  ${userLastName}`);
+    console.log(`User Email : ${userEmail}`);
 
     await page.goto(locators.pageURL.startcouncil,{ timeout: 120000 });
     await page.click(locators.login.signInButton);
@@ -53,7 +55,7 @@ test('DNA User Registeration' , async () => {
     await page.click(locators.adminStartcouniclPage.userEmails(userEmail));
 
     const subject = await page.textContent(locators.adminStartcouniclPage.userEmailSubject(userEmail));
-    const sampleText = sampleEmails.email || ''; 
+    const sampleText = sampleEmails.email_1 || ''; 
     const subjectText = subject?.trim() || '';
     console.log('Sample Text:', sampleText);
     console.log('Subject Text:', subjectText);
@@ -127,7 +129,7 @@ test('DNA User Registeration' , async () => {
 
     await page.click(locators.dnaRegisteration.upgradeFullReport);
 
-    payment(page);
+    payment(page,test);
 
 
 });
