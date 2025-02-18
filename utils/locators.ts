@@ -65,7 +65,7 @@ export const locators = {
       `(//div[contains(text(),'question ${questionNumber}')]/following::button)[${buttonIndex}]`,
         imageQuestionButton :(imageQuestionNumber: number) => 
             `(//div[contains(text(),'question ${imageQuestionNumber}')]/following::div)[24]`,
-        fullTest:"//button[contains(text(),'Start the full test')]",
+        fullTest:"//button[contains(text(),'Start the full')]",
         testContinue:"//button[contains(text(),'Continue')]",
         imageAnswer:"//div[@data-answer='3']",
         submitTest:"//button[contains(text(),'Submit and view report')]",
@@ -169,10 +169,25 @@ export const locators = {
         emailToFeild:"(//label[text()='To']/following::input[@type='text'])[1]",
         filterButton:"//input[@data-disable-with='Filter']",
         userEmails:(userEmail :string) =>
-            `//p[text()='${userEmail}']`,
+            `//p[contains(text(),'${userEmail}')]`,
         userEmailSubject:(userEmail :string) =>
             `(//dd[contains(text(),'${userEmail}')]/following::dd)[1]`,
-        
+        logout:"//a[text()='Logout']",
+
+    },
+    dnaRegisteration:{
+        dnaPageUrl:"https://dna.startcouncil.org/",
+        takeAssessmentButton:"(//span[text()='Take the Assessment'])[1]",
+        firstName:"//input[@id='dna_user_first_name']",
+        lastName:"//input[@id='dna_user_last_name']",
+        userEmail:"(//input[@id='dna_user_email'])[1]",
+        userSource:"//select[@id='dna_user_source']",
+        startAssessmentButton:"//span[text()='Start the Assessment']",
+        regConfirmation:"//div[contains(text(),'A message with a confirmation link')]",
+        superMagicLinkDNA:"//a[text()='super special magic link']",
+        getStartedButton:"(//span[text()='Get Started'])[1]",
+        startTheAssessmentBtn:"//span[text()='Start the Assessment']",
+        upgradeFullReport:"//span[text()='Upgrade to Full Report']",
     },
     
 

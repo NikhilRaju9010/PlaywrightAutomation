@@ -2,7 +2,7 @@ import { test ,chromium} from '@playwright/test';
 import { locators } from '../utils/locators';
 
 
-test('Updating the semester sessions dates to make semester to operating' , async () => {
+test('Validating emails received to the founder' , async () => {
 
         test.setTimeout(0); 
 
