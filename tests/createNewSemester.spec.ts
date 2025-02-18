@@ -3,7 +3,7 @@ import { locators } from '../utils/locators';
 import {extractId} from '../utils/extractSemesterID';
 test('Creating a New Semester' , async () => {
 
-    //test.setTimeout(300000); // ## 5 Minutes Wait ##
+    test.setTimeout(0); 
 
     const browser = await chromium.launch({ 
         headless: process.env.CI ? true : false
@@ -12,6 +12,7 @@ test('Creating a New Semester' , async () => {
     const page = await browser.newPage();
 
     await page.setViewportSize({ width: 1920, height: 1080 });
+    page.setDefaultTimeout(30000); // Set default timeout for element actions to 30 seconds
 
     await page.goto(locators.pageURL.startcouncil,{ timeout: 120000 });
     await page.click(locators.login.signInButton);
@@ -54,13 +55,14 @@ test('Creating a New Semester' , async () => {
     console.log('New Semester got created successfully');
 
     await page.goto("https://startcouncil.org/admin/semester",{ timeout: 120000 });  
-    const semesterName = await page.textContent(locators.adminSemesterPage.semesterNameAndID);
+    const semesterNameLocator = await page.locator(locators.adminSemesterPage.semesterNameAndID);
+    const semesterName = await semesterNameLocator.innerText();
     console.log('New Semester Created with Name :- '+ semesterName);
-    const name = "Silicon Valley Fall 2024 (11160)";
 
     const semesterID = semesterName ? extractId(semesterName) : null;
     console.log('New Semester Created with ID :- '+ semesterID);
 
+    await page.waitForTimeout(2000);
 });
 
 // To Run The code ---> npx playwright test tests/createNewSemester.spec.ts

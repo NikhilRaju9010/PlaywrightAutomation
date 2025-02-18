@@ -17,27 +17,35 @@ export const sessionList = {
     session01:"Accelerator Kickoff"
 };
 
+
 export function generateSessionDates(sessionList: Record<string, string>) {
     const today = new Date();
-    const initialDate = addDays(today, 5); // Set session14 date as 5 days from today
-
-    const updatedSessionDates: Record<string, { session_name: string; day: string; month: string; year: string; }> = {};
+    const initialDate = addDays(today, 5);
+    const updatedSessionDates: Record<string, { session_name: string; day: string; month: number; year: string; }> = {};
 
     let currentDate = initialDate;
 
     Object.entries(sessionList).forEach(([sessionKey, sessionName]) => {
         updatedSessionDates[sessionKey] = {
             session_name: sessionName,
-            day: format(currentDate, 'dd'),
-            month: format(currentDate, 'MM'),
+            day: format(currentDate, 'd'), 
+            month: currentDate.getMonth(), 
             year: format(currentDate, 'yyyy'),
         };
-        
-        // Subtract 5 days for the next session
+
         currentDate = subDays(currentDate, 5);
     });
 
     return updatedSessionDates;
+}
+
+export function getMonthName(monthIndex: number): string {
+    const months = [
+        "January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"
+    ];
+    
+    return months[monthIndex] || "Invalid month"; 
 }
 
 // To Run The code ---> npx ts-node utils/updateSessionDates.ts

@@ -135,23 +135,23 @@ export const locators = {
         sessionDateSelect: (sessionName: string ,newDate : string) =>  
             `(//div[contains(text(),'${sessionName}')]/following::span[contains(text(),'${newDate}')])[1]`,
         sessionDateIcon:(sessionName: string) =>
-        `//span[text()='${sessionName}']`,
+        `(//span[text()='${sessionName}']/following::a)[1]`,
         sessionMonthSelect:(sessionName: string) =>
             `(//div[text()='${sessionName}']/following::select[@class='flatpickr-monthDropdown-months'])[1]`,
         sessionYearSelect:(sessionName: string) =>
-            `(//span[text()='${sessionName}']/following::input[@aria-label="Year"])[1]`,
+            `(//span[text()='${sessionName}']/following::div[@class='numInputWrapper']/input[@aria-label='Year'])[1]`,
         sessionTimeHours:(sessionName: string) =>
-            `(//span[text()='${sessionName}']/following::input[@type="number"])[2]`,
+        `(//span[text()='${sessionName}']/following::div[@class='flatpickr-time']/div[@class='numInputWrapper'])[1]`,
         sessionTimeMinutes:(sessionName: string) =>
             `(//span[text()='${sessionName}']/following::input[@type="number"])[3]`,
         sessionSaveButton:(sessionName: string) =>
-            `(//span[text()='${sessionName}']/following::input[@name="commit"])[1]`,
+            `(//span[text()='${sessionName}']/following::input[@type='submit'])[last()]`,
         yearSelect:"(//div[contains(text(),'Accelerator Kickoff')]/following::input[@aria-label='Year'])[1]",
         timeHours:"(//div[contains(text(),'Accelerator Kickoff')]/following::input[@type='number'])[2]",
         timeMinutes:"(//div[contains(text(),'Accelerator Kickoff')]/following::input[@type='number'])[3]",
         savetimeAndDate:"//div[contains(text(),'Accelerator Kickoff')]/following::input[@name='commit']",
         recruitingText:"((//span[contains(text(),'Dashboard')])[3]/following::span)[2]",
-        semesterNameAndID:"((//div[contains(text(),'Semester')])[2]/following::div)[1]",
+        semesterNameAndID:"(//div[text()='Semester']/following::div)[1]",
     },
     adminNewSemesterPage:{
         adminNewSemesterPageURL:"https://startcouncil.org/admin/new_semester",

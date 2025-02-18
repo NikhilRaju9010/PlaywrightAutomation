@@ -1,6 +1,7 @@
 import { test ,chromium} from '@playwright/test';
 import { locators } from '../utils/locators';
 import {getFutureDate} from '../utils/getFutureDate';
+import {getMonthName} from '../utils/updateSessionDates';
 
 test('Converting a semester to Recruiting' , async () => {
 
@@ -23,9 +24,11 @@ test('Converting a semester to Recruiting' , async () => {
         console.log('SuperAdmin logged in successfully');
         await page.goto(locators.adminSemesterPage.adminSemesterPageURL,{ timeout: 120000 });
         await page.click(locators.adminSemesterPage.acceleratorKickoffSession);
-        console.log(getFutureDate(10).month.toString());
+        console.log(`Semester start month is updating to : ${getMonthName(getFutureDate(10).month)} `);
+
         await page.selectOption(locators.adminSemesterPage.monthDropDown, {value :getFutureDate(10).month.toString()});
-        console.log(getFutureDate(10).day.toString());
+        console.log(`Semestr start date is updaing to : ${getFutureDate(10).day.toString()}`);
+
         const newDate = await page.locator(locators.adminSemesterPage.dateSelect(getFutureDate(10).day.toString()));
         await newDate.click();
         await page.fill(locators.adminSemesterPage.yearSelect,getFutureDate(10).year.toString());
@@ -33,9 +36,8 @@ test('Converting a semester to Recruiting' , async () => {
         await page.fill(locators.adminSemesterPage.timeMinutes, '00');
         await page.click(locators.adminSemesterPage.savetimeAndDate);
         const semesterStatus = await page.textContent(locators.adminSemesterPage.recruitingText);
-        const { day, month, year } = getFutureDate(10)
-        const newMonth = month + 1;
-        console.log('Semester is converted to '+ semesterStatus + ` with startdate of :- ${day} / ${newMonth} / ${year}` );
+        const { day, month, year } = getFutureDate(10);
+        console.log('Semester is converted to '+ semesterStatus + ` with startdate of :- ${day} / ${getMonthName(getFutureDate(10).month)} / ${year}` );
 
 
 
