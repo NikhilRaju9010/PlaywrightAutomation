@@ -16,7 +16,7 @@ test('User Registeration Flow' , async () => {
     const page = await browser.newPage();
 
     await page.setViewportSize({ width: 1920, height: 1080 });
-    page.setDefaultTimeout(30000); // Set default timeout for element actions to 30 seconds
+    page.setDefaultTimeout(50000); // Set default timeout for element actions to 50 seconds(To do the Chaptcha manually)
 
         const savePath = './screen-shots';
         const browserName = 'chromium';
@@ -211,7 +211,7 @@ test('User Registeration Flow' , async () => {
         await page.click(locators.acceptedUser.saveFileButton);
         await page.click(locators.acceptedUser.payEntranceFeeButton);
         await page.click(locators.acceptedUser.payWithCard);
-        console.log('User signed the agreement and paid the entrance fee');
+        console.log('User signed the Founder Agreement');
 
 
         //Filling card details
@@ -220,6 +220,7 @@ test('User Registeration Flow' , async () => {
         await NumberEntry.enterNumber(page, locators.acceptedUser.cvc, '567'); // CVV
         await page.fill(locators.acceptedUser.cardHolderName, locators.acceptedUser.cardHolderNameText); // Card Holder Name
         await page.locator(locators.acceptedUser.cardHolderName).press('Enter');
+        console.log('User Completed the payment process');
 
         //Founder Home Page
         await page.click(locators.confirmedFounder.navbarHomeButton);
