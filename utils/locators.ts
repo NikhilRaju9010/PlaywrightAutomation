@@ -163,7 +163,17 @@ export const locators = {
         programType:"//select[@id='semester_program_type']",
         createSemester:"(//input[@type='submit'])[1]",
 
-    }
+    },
+    adminStartcouniclPage:{
+        adminStartcouniclPageURL:"https://admin.startcouncil.org",
+        emailToFeild:"(//label[text()='To']/following::input[@type='text'])[1]",
+        filterButton:"//input[@data-disable-with='Filter']",
+        userEmails:(userEmail :string) =>
+            `//p[text()='${userEmail}']`,
+        userEmailSubject:(userEmail :string) =>
+            `(//dd[contains(text(),'${userEmail}')]/following::dd)[1]`,
+        
+    },
     
 
 };
